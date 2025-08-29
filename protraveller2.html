@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ProTraveller - Tu compañero inteligente de viaje</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #4F46E5;
+            --secondary: #10B981;
+            --dark: #1F2937;
+            --light: #F8FAFC;
+        }
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f8fafc;
+            scroll-behavior: smooth;
+        }
+        .gradient-bg {
+            background: linear-gradient(135deg, #1e40af 0%, #7c3aed 100%);
+        }
+        .radar-container {
+            position: relative;
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            overflow: hidden;
+        }
+        .radar-sweep {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: conic-gradient(
+                transparent 270deg,
+                rgba(16, 185, 129, 0.3) 360deg
+            );
+            border-radius: 50%;
+            animation: radar-rotation 3s linear infinite;
+            transform-origin: center;
+        }
+        @keyframes radar-rotation {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        .radar-dot {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background: #EF4444;
+            border-radius: 50%;
+            animation: radar-pulse 2s infinite;
+        }
+        @keyframes radar-pulse {
+            0% { transform: scale(0.8); opacity: 0.8; }
+            50% { transform: scale(1.4); opacity: 1; }
+            100% { transform: scale(0.8); opacity: 0.8; }
+        }
+        .feature-card:hover {
+            transform: translateY(-5px);
+            transition: all 0.3s ease;
+        }
+        .newsletter-form {
+            transition: all 0.3s;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .newsletter-form:focus-within {
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+        }
+        #success-message {
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="bg-white shadow-lg sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <div class="flex-shrink-0 flex items-center">
+                        <img src="https://placehold.co/40x40" alt="Logo ProTraveller" class="h-8 w-8 mr-2">
+                        <span class="ml-2 text-xl font-bold text-gray-900 hidden sm:block">ProTraveller</span>
+                    </div>
+                </div>
+                <div class="hidden md:ml-6 md:flex md:items-center md:space-x-8">
+                    <a href="#features" class="border-b-2 border-transparent px-1 pt-1 text-sm font-medium text-gray-700 hover:border-indigo-600 hover:text-indigo-600 transition duration-300">Características</a>
+                    <a href="#how-it-works" class="border-b-2 border-transparent px-1 pt-1 text-sm font-medium text-gray-700 hover:border-indigo-600 hover:text-indigo-600 transition duration-300">Cómo funciona</a>
+                    <a href="#demo" class="border-b-2 border-transparent px-1 pt-1 text-sm font-medium text-gray-700 hover:border-indigo-600 hover:text-indigo-600 transition duration-300">Demo</a>
+                    <a href="#newsletter" class="border-b-2 border-transparent px-1 pt-1 text-sm font-medium text-gray-700 hover:border-indigo-600 hover:text-indigo-600 transition duration-300">Más Info</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="gradient-bg text-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+            <div class="flex flex-col md:flex-row items-center">
+                <div class="md:w-1/2 mb-10 md:mb-0 md:pr-10">
+                    <h1 class="text-4xl md:text-5xl font-bold leading-tight mb-6">ProTraveller:<br>Tu guía inteligente en carretera</h1>
+                    <p class="text-xl mb-8 max-w-lg">La solución más avanzada para alertas de tráfico y navegación segura</p>
+                    <div class="flex space-x-4">
+                        <a href="#newsletter" class="bg-white text-indigo-800 font-bold rounded-full py-3 px-6 shadow-lg hover:bg-gray-100 transition duration-300 flex items-center justify-center">
+                            Más información
+                        </a>
+                    </div>
+                </div>
+                <div class="md:w-1/2 flex justify-center">
+                    <div class="relative">
+                        <img src="https://placehold.co/600x400" alt="Dispositivo ProTraveller montado en salpicadero de coche mostrando alertas de navegación" class="rounded-lg shadow-2xl transform hover:scale-105 transition duration-500">
+                        <div class="absolute -bottom-5 -left-5 bg-white p-3 rounded-lg shadow-md hidden md:block">
+                            <div class="flex items-center">
+                                <div class="bg-green-100 p-2 rounded-full mr-2">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                                    </svg>
+                                </div>
+                                <div>
+                                    <div class="font-bold text-gray-900">+3000</div>
+                                    <div class="text-xs text-gray-500">Puntos detectados</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="py-16 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-extrabold text-gray-900 sm:text-4xl">Características exclusivas</h2>
+                <p class="mt-4 max-w-2xl text-xl text-gray-500 mx-auto">Tecnología diseñada para viajeros frecuentes</p>
+            </div>
+            <div class="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
+                <div class="feature-card bg-gray-50 p-6 rounded-xl shadow-sm hover:shadow-md transition duration-300">
+                    <div class="rounded-md bg-indigo-50 p-3 inline-flex mb-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-indigo-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z" />
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3">Actualizaciones en tiempo real</h3>
+                    <p class="text-gray-600">Base de datos actualizada constantemente con información de última hora sobre carreteras y puntos de control.</p>
+                </div>
+                <div class="feature-card bg-gray-50 p-6 rounded-xl shadow-sm hover:shadow-md transition duration-300">
+                    <div class="rounded-md bg-indigo-50 p-3 inline-flex mb-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-indigo-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3">Alertas precoces</h3>
+                    <p class="text-gray-600">Avisos con gran antelación para que tengas tiempo suficiente de reaccionar ante cualquier situación en carretera.</p>
+                </div>
+                <div class="feature-card bg-gray-50 p-6 rounded-xl shadow-sm hover:shadow-md transition duration-300">
+                    <div class="rounded-md bg-indigo-50 p-3 inline-flex mb-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-indigo-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3">Modo viaje</h3>
+                    <p class="text-gray-600">Configuración especial para viajes largos que optimiza las alertas según el tipo de carretera y condiciones atmosféricas.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works -->
+    <section id="how-it-works" class="py-16 bg-gray-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="lg:text-center mb-16">
+                <h2 class="text-3xl font-extrabold text-gray-900 sm:text-4xl">Cómo ProTraveller mejora tus viajes</h2>
+                <p class="mt-4 max-w-2xl text-xl text-gray-500 lg:mx-auto">Tecnología avanzada para tu tranquilidad al volante</p>
+            </div>
+            
+            <div class="flex flex-col lg:flex-row">
+                <div class="lg:w-1/2 mb-10 lg:mb-0 lg:pr-10">
+                    <div class="bg-black p-6 rounded-xl shadow-lg">
+                        <div class="radar-container mx-auto">
+                            <div class="radar-sweep"></div>
+                            <div class="radar-dot" style="top: 30%; left: 60%;"></div>
+                            <div class="radar-dot" style="top: 65%; left: 25%;"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="lg:w-1/2">
+                    <div class="flex mb-8">
+                        <div class="flex-shrink-0">
+                            <div class="flex items-center justify-center h-12 w-12 rounded-md bg-indigo-600 text-white">
+                                <span class="text-xl font-bold">1</span>
+                            </div>
+                        </div>
+                        <div class="ml-4">
+                            <h3 class="text-lg font-medium text-gray-900">Detección avanzada</h3>
+                            <p class="mt-2 text-gray-600">
+                                Nuestros sensores escanean continuamente el entorno para identificar puntos de interés relevantes para tu viaje.
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div class="flex mb-8">
+                        <div class="flex-shrink-0">
+                            <div class="flex items-center justify-center h-12 w-12 rounded-md bg-indigo-600 text-white">
+                                <span class="text-xl font-bold">2</span>
+                            </div>
+                        </div>
+                        <div class="ml-4">
+                            <h3 class="text-lg font-medium text-gray-900">Procesamiento inteligente</h3>
+                            <p class="mt-2 text-gray-600">
+                                Analizamos los datos en tiempo real para filtrar información relevante y ofrecerte solo lo que necesitas saber.
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div class="flex mb-8">
+                        <div class="flex-shrink-0">
+                            <div class="flex items-center justify-center h-12 w-12 rounded-md bg-indigo-600 text-white">
+                                <span class="text-xl font-bold">3</span>
+                            </div>
+                        </div>
+                        <div class="ml-4">
+                            <h3 class="text-lg font-medium text-gray-900">Alertas contextuales</h3>
+                            <p class="mt-2 text-gray-600">
+                                Recibe avisos claros y precisos adaptados a tu tipo de viaje y preferencias personales.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter Section -->
+    <section id="newsletter" class="py-16 bg-white border-t border-gray-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-extrabold text-gray-900 sm:text-4xl">¿Quieres más información sobre ProTraveller?</h2>
+                <p class="mt-4 max-w-2xl text-xl text-gray-500 mx-auto">Déjanos tu email y te contactaremos con todos los detalles</p>
+            </div>
+            
+            <div class="max-w-md mx-auto">
+                <form id="contact-form" action="https://formsubmit.co/YOUR_EMAIL_HERE" method="POST" class="newsletter-form bg-gray-50 rounded-lg p-6">
+                    <input type="hidden" name="_captcha" value="false">
+                    <input type="hidden" name="_next" value="https://yourwebsite.com/thank-you.html">
+                    
+                    <div class="mb-4">
+                        <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Email</label>
+                        <input type="email" id="email" name="email" required class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500" placeholder="tu@email.com">
+                    </div>
+                    
+                    <div class="mb-4">
+                        <label for="interest" class="block text-sm font-medium text-gray-700 mb-1">Estoy interesado en:</label>
+                        <select id="interest" name="interest" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500">
+                            <option value="general">Información general</option>
+                            <option value="commercial">Distribución comercial</option>
+                            <option value="technical">Detalles técnicos</option>
+                            <option value="pricing">Precios y planes</option>
+                        </select>
+                    </div>
+                    
+                    <div class="mb-4">
+                        <label class="flex items-center">
+                            <input type="checkbox" class="rounded border-gray-300 text-indigo-600 focus:ring-indigo-500 mr-2" required>
+                            <span class="text-sm text-gray-700">Acepto recibir información sobre ProTraveller</span>
+                        </label>
+                    </div>
+                    
+                    <button type="submit" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-medium py-2 px-4 rounded-md transition duration-300">
+                        Enviar solicitud
+                    </button>
+                    
+                    <div id="success-message" class="mt-4 p-3 bg-green-50 text-green-700 rounded-md text-sm hidden">
+                        ¡Gracias por tu interés! Te contactaremos pronto con más información.
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row justify-between">
+                <div class="mb-8 md:mb-0">
+                    <div class="flex items-center mb-4">
+                        <img src="https://placehold.co/40x40" alt="Logo ProTraveller" class="h-8 w-8 mr-2">
+                        <span class="text-xl font-semibold">ProTraveller</span>
+                    </div>
+                    <p class="text-gray-400 mb-4 max-w-xs">La solución inteligente para tus viajes por carretera</p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-white">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                <path fill-rule="evenodd" d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z" clip-rule="evenodd" />
+                            </svg>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                <path fill-rule="evenodd" d="M12.315 2c2.43 0 2.784.013 3.808.06 1.064.049 1.791.218 2.427.465a4.902 4.902 0 011.772 1.153 4.902 4.902 0 011.153 1.772c.247.636.416 1.363.465 2.427.048 1.067.06 1.407.06 4.123v.08c0 2.643-.012 2.987-.06 4.043-.049 1.064-.218 1.791-.465 2.427a4.902 4.902 0 01-1.153 1.772 4.902 4.902 0 01-1.772 1.153c-.636.247-1.363.416-2.427.465-1.067.048-1.407.06-4.123.06h-.08c-2.643 0-2.987-.012-4.043-.06-1.064-.049-1.791-.218-2.427-.465a4.902 4.902 0 01-1.772-1.153 4.902 4.902 0 01-1.153-1.772c-.247-.636-.416-1.363-.465-2.427-.047-1.024-.06-1.379-.06-3.808v-.63c0-2.43.013-2.784.06-3.808.049-1.064.218-1.791.465-2.427a4.902 4.902 0 011.153-1.772A4.902 4.902 0 015.45 2.525c.636-.247 1.363-.416 2.427-.465C8.901 2.013 9.256 2 11.685 2h.63zm-.081 1.802h-.468c-2.456 0-2.784.011-3.807.058-.975.045-1.504.207-1.857.344-.467.182-.8.398-1.15.748-.35.35-.566.683-.748 1.15-.137.353-.3.882-.344 1.857-.047 1.023-.058 1.351-.058 3.807v.468c0 2.456.011 2.784.058 3.807.045.975.207 1.504.344 1.857.182.466.399.8.748 1.15.35.35.683.566 1.15.748.353.137.882.3 1.857.344 1.054.048 1.37.058 4.041.058h.08c2.597 0 2.917-.01 3.96-.058.976-.045 1.505-.207 1.858-.344.466-.182.8-.398 1.15-.748.35-.35.566-.683.748-1.15.137-.353.3-.882.344-1.857.048-1.055.058-1.37.058-4.041v-.08c0-2.597-.01-2.917-.058-3.96-.045-.976-.207-1.505-.344-1.858a3.097 3.097 0 00-.748-1.15 3.098 3.098 0 00-1.15-.748c-.353-.137-.882-.3-1.857-.344-1.023-.047-1.351-.058-3.807-.058zM12 6.865a5.135 5.135 0 110 10.27 5.135 5.135 0 010-10.27zm0 1.802a3.333 3.333 0 100 6.666 3.333 3.333 0 000-6.666zm5.338-3.205a1.2 1.2 0 110 2.4 1.2 1.2 0 010-2.4z" clip-rule="evenodd" />
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="grid grid-cols-2 gap-8 sm:grid-cols-3">
+                    <div>
+                        <h3 class="text-sm font-semibold text-gray-400 uppercase tracking-wider">Producto</h3>
+                        <ul class="mt-4 space-y-2">
+                            <li><a href="#features" class="text-gray-300 hover:text-white transition duration-300">Características</a></li>
+                            <li><a href="#how-it-works" class="text-gray-300 hover:text-white transition duration-300">Cómo funciona</a></li>
+                            <li><a href="#demo" class="text-gray-300 hover:text-white transition duration-300">Demo</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 class="text-sm font-semibold text-gray-400 uppercase tracking-wider">Empresa</h3>
+                        <ul class="mt-4 space-y-2">
+                            <li><a href="#" class="text-gray-300 hover:text-white transition duration-300">Sobre nosotros</a></li>
+                            <li><a href="#" class="text-gray-300 hover:text-white transition duration-300">Contacto</a></li>
+                            <li><a href="#" class="text-gray-300 hover:text-white transition duration-300">Privacidad</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 class="text-sm font-semibold text-gray-400 uppercase tracking-wider">Legal</h3>
+                        <ul class="mt-4 space-y-2">
+                            <li><a href="#" class="text-gray-300 hover:text-white transition duration-300">Términos</a></li>
+                            <li><a href="#" class="text-gray-300 hover:text-white transition duration-300">Privacidad</a></li>
+                            <li><a href="#" class="text-gray-300 hover:text-white transition duration-300">Cookies</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mt-8 pt-8 border-t border-gray-800 text-center text-gray-400 text-sm">
+                <p>© 2023 ProTraveller. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Form submission handling
+        document.getElementById('contact-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Simulate form submission (in a real implementation this would be handled by FormSubmit.co)
+            setTimeout(function() {
+                document.getElementById('success-message').classList.remove('hidden');
+                document.getElementById('success-message').style.opacity = '1';
+                document.getElementById('contact-form').reset();
+                
+                // Hide success message after 5 seconds
+                setTimeout(function() {
+                    document.getElementById('success-message').style.opacity = '0';
+                    setTimeout(function() {
+                        document.getElementById('success-message').classList.add('hidden');
+                    }, 500);
+                }, 5000);
+            }, 1000);
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>
